@@ -9,6 +9,7 @@ const auth = (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET)
     req.user = { username: payload.username, userId: payload.userId }
+    // console.log(req.user)
     next()
   } catch (error) {
     res.status(500).json({ message: error.message })

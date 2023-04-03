@@ -27,7 +27,14 @@ const createStory = async (req, res) => {
 
 const getStories = async (req, res) => {
   try {
-    const stories = await Story.find().limit(10)
+    const user = await User.findById(req.user.userId)
+    const userStories = await Story.find({ creatorId: req.user.userId }).sort({ createdAt: 1 }).limit(10)
+    const freindsStories = await Promise.all(
+      user.freinds.map((freindId) => {
+        return Story.find({ creatorId: freindId }).sort({ createdAt: 1 }).limit(10)
+      })
+    );
+    const stories = userStories.concat(...freindsStories)
     res.status(200).json(stories)
   } catch (error) {
     res.status(500).json({ message: error.message })
@@ -36,7 +43,7 @@ const getStories = async (req, res) => {
 const deleteStory = async (req, res) => {
   try {
     const stories = await Story.findByIdAndDelete({ _id: req.params.id })
-    res.status(200).json({ message: 'Deleted' })
+    res.status(204).json({ message: 'Deleted' })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

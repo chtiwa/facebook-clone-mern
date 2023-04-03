@@ -1,0 +1,148 @@
+.right__nav {
+  position: sticky;
+  height: max-content;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--whitish);
+  /* padding: 0.5rem; */
+}
+
+/* search */
+/* .right__nav-search {
+} */
+
+.righ__nav-input-control {
+  position: relative;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.7rem;
+  box-shadow: 0 0 3px var(--rgba);
+  background-color: var(--white);
+  border-radius: 5px;
+}
+
+.righ__nav-input-control-icon {
+  position: absolute;
+  left: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  opacity: 0.9;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/*  */
+
+.right__nav-hr {
+  width: 90%;
+  opacity: 0.4;
+}
+
+/*  */
+
+.righ__nav-input-control input {
+  border: 0;
+  outline: 0;
+  background-color: var(--white);
+  font-size: 16px;
+  margin-left: 2rem;
+}
+
+.right__nav-freinds-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* padding: 0.5rem 0.6rem; */
+  margin: 1rem 0;
+}
+
+
+.right__nav-freinds-search h4 {
+  margin: 0;
+  color: var(--secondary-blackish);
+}
+
+.right__nav-freinds-search-icon {
+  font-size: 20px;
+  opacity: 0.9;
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: var(--whitish);
+  border-radius: 50%;
+  margin: 0 0.5rem;
+}
+
+.right__nav-freinds-search-icon:hover {
+  background-color: var(--whitish-hover);
+}
+
+.right__nav-freinds-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.right__nav-freinds-container-freind {
+  width: 100%;
+  margin: 0.1rem 0;
+  border-radius: 5px;
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.right__nav-freinds-container-freind:hover {
+  background-color: var(--whitish-hover);
+}
+
+.right__nav-freinds-container-freind-picture {
+  height: 35px;
+  width: 35px;
+  position: relative;
+}
+
+.right__nav-freinds-container-freind-picture-empty {
+  height: 40px;
+  width: 40px;
+  font-size: 24px;
+  background-color: var(--rgba);
+  border-radius: 50%;
+}
+
+.right__nav-freinds-container-freind-picture-badge {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  padding: 0.3rem;
+  background-color: var(--green-light);
+  border-radius: 50%;
+}
+
+.right__nav-freinds-container-freind-picture img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.right__nav-freinds-container-freind-name {
+  opacity: 0.9;
+  margin-left: 1rem;
+}
+
+@media screen and (max-width:720px) {
+  .right__nav {
+    display: none;
+  }
+
+}

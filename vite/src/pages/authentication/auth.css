@@ -1,0 +1,158 @@
+.auth {
+  background-color: var(--whitish);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  height: 100vh;
+  /* modal */
+  position: relative;
+}
+
+
+.auth-title {
+  padding: 1rem 0;
+}
+
+.auth-title h2 {
+  color: var(--accent);
+  font-size: 56px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.auth-title p {
+  margin: 0;
+  margin-top: 0.3rem;
+  opacity: 0.9;
+  font-size: 26px;
+  max-width: 500px;
+  font-weight: 400;
+}
+
+.auth-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0.5rem;
+  background-color: var(--white);
+  box-shadow: 0 0 3px var(--rgba);
+  border-radius: 5px;
+  width: 400px;
+}
+
+.auth-form-control {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form-control input {
+  padding: 0.75rem 0.8rem;
+  width: 90%;
+  margin: 0.5rem auto;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.auth-form-control input:focus {
+  outline: 0.5px solid var(--accent);
+}
+
+.auth-form-control-password {
+  position: relative;
+}
+
+.auth-password-icon {
+  position: absolute;
+  right: 5%;
+  cursor: pointer;
+}
+
+.auth-form-control-submit {
+  width: 97%;
+  margin: 0.5rem auto;
+  padding: 0.75rem 0.8rem;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: var(--accent);
+  box-shadow: 0 0 3px var(--rgba);
+  cursor: pointer;
+}
+
+.auth-form-control-submit:hover {
+  background-color: var(--accent-hover);
+}
+
+.auth-form-control-forgot {
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.auth-form-hr {
+  width: 100%;
+  opacity: 0.4;
+}
+
+.auth-form-control-create {
+  width: 60%;
+  margin: 0.5rem auto;
+  padding: 0.75rem 0.8rem;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: var(--green);
+  cursor: pointer;
+}
+
+.auth-form-control-create:hover {
+  background-color: var(--green-hover);
+}
+
+@media screen and (max-width:1000px) {
+  .auth {
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width:950px) {
+  .auth {
+    flex-direction: column;
+  }
+
+  .auth-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .auth-title p {
+    text-align: center;
+  }
+}
+
+
+.reset__password {
+  background-color: var(--whitish);
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+@media screen and (max-width:430px) {
+  .auth-form {
+    width: 85vw;
+  }
+}

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const connectDB = (url) => {
-  return mongoose.connect(url, {
+const connectDB = (uri) => {
+  return mongoose.connect(uri, {
     useUnifiedTopology: true
   })
     .then(() => console.log(`CONNECTED TO THE DATABASE`))

@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white);
+  box-shadow: 0 1px 0 var(--rgba);
+}
+
+.navbar__logo {
+  flex: 0.6;
+  width: 40px;
+  height: 40px;
+  margin-left: 1rem;
+}
+
+.navbar__logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.navbar__search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 2;
+  padding: 0 0.5rem;
+  margin-left: 5vw;
+}
+
+@media screen and (max-width:980px) {}

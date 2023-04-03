@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const PostSchema = new mongoose.Schema({
   title: {
-    type: String,
-    required: [true, 'Please provide a title']
+    type: String
+    // required: [true, 'Please provide a title']
   },
   creator: {
     type: String,
@@ -17,9 +17,12 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a description']
   },
-  file: {
-    format: String,
-    url: String
+  // file: {
+  //   format: String,
+  //   url: String
+  // },
+  files: {
+    type: [{ format: String, url: String }]
   },
   likes: {
     type: Array,

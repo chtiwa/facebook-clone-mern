@@ -1,0 +1,16 @@
+.left__nav-list {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0.6rem;
+  flex-direction: column;
+}
+
+.left__nav-list-item {
+  padding: 0.3rem;
+}
+
+.left__nav-list-item-icon {
+  font-size: 20px;
+}

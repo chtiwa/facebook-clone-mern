@@ -1,0 +1,63 @@
+.freind__request-user {
+  margin: 0.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
+}
+
+.freind__request-user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.freind__request-user-profile-pciture {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.freind__request-user-profile-pciture img {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.freind__request-user-username {
+  font-size: 17px;
+  color: var(--blackish);
+  margin: 0 0.5rem;
+}
+
+.freind__request-user-features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.freind__request-user-features {
+  padding: 0.4rem 0.6rem;
+  background-color: var(--accent);
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.freind__request-user-features:hover {
+  background-color: var(--accent-hover);
+}
+
+.freind__request-user-features-icon {
+  color: var(--white);
+}
+
+.freind__request-container-inner {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,13 +1,13 @@
+require('dotenv').config()
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const sendEmail = require('../utils/sendEmail')
-// const cloudinary = require('../utils/cloudinary')
 
 const signup = async (req, res) => {
   try {
     const user = await User.create({ ...req.body })
     const token = user.createJWT()
-    const expires = new Date(Date.now() + 86400 * 10000) // 10 days
+    const expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 10) // 10 days
     res.status(201)
       .cookie("token", token, { httpOnly: true, expires: expires })
       .json({ username: user.username, userId: user._id, profilePicture: user.profilePicture })
@@ -35,7 +35,7 @@ const login = async (req, res) => {
     }
 
     const token = user.createJWT()
-    const expires = new Date(Date.now() + 86400 * 10000) // 10 days
+    const expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 10) // 10 days
     res.status(200)
       .cookie("token", token, { httpOnly: true, expires: expires })
       .json({ username: user.username, userId: user._id, profilePicture: user.profilePicture })
@@ -77,7 +77,7 @@ const forgotPassword = async (req, res, next) => {
       return res.status(404).json({ success: false, message: `Email doesn't exist!` })
     }
     const pswjwt = user.resetPasswordJWT()
-    const resultUrl = `http://localhost:3000/resetpassword/${pswjwt}`
+    const resultUrl = `${process.env.CLIENT_URL}/resetpassword/${pswjwt}`
 
     const message = `
     <h1>You have requested a password reset</h1>
@@ -89,6 +89,7 @@ const forgotPassword = async (req, res, next) => {
       sendEmail({
         to: user.email,
         text: message
+        // subject:subject
       })
       res.status(200).json({ success: true, message: `Email was sent successfuly` })
     } catch (error) {

@@ -7,6 +7,7 @@ const sendEmail = (options) => {
     },
     from: process.env.OUTLOOK_EMAIL,
     to: options.to,
+    // subject: options.subject,
     subject: 'Password reset',
     text: options.text,
     onError: (e) => (e),

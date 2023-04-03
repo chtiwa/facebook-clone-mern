@@ -12,13 +12,12 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, 'Please provide an email'],
-    match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please Provide An Email'],
+    match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please Provide a valid Email'],
     unique: true
   },
   password: {
     type: String,
     required: [true, 'Please provide a password'],
-    // chekced in the input
     minlength: 6
   },
   profilePicture: {
@@ -29,13 +28,21 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
-  followers: {
-    type: Array,
+  // followers: {
+  //   type: [mongoose.Schema.Types.ObjectId],
+  //   default: []
+  // },
+  freindRequestsReceived: {
+    type: [mongoose.Schema.Types.ObjectId],
     default: []
   },
-  followings: {
-    type: Array,
+  freindRequestsSent: {
+    type: [mongoose.Schema.Types.ObjectId],
     default: []
+  },
+  freinds: {
+    type: [mongoose.Schema.Types.ObjectId],
+    deafult: []
   },
 }, { timestamps: true })
 
