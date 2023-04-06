@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { axiosInstance } from '../axios'
+import { axiosPrivate } from '../utils/axiosPrivate'
 
 export const getMessages = createAsyncThunk('messages/getMessages', async (params, { rejectWithValue }) => {
   try {
     // console.log(params)
-    const { data } = await axiosInstance.get(`/messages/${params.conversationId}`)
+    const { data } = await axiosPrivate.get(`/messages/${params.conversationId}`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || 'There was an error' })
@@ -13,7 +13,7 @@ export const getMessages = createAsyncThunk('messages/getMessages', async (param
 
 export const createMessage = createAsyncThunk('messages/createMessage', async (params, { rejectWithValue }) => {
   try {
-    const { data } = await axiosInstance.post(`/messages`, { conversationId: params.conversationId, sender: params.sender, text: params.text })
+    const { data } = await axiosPrivate.post(`/messages`, { conversationId: params.conversationId, sender: params.sender, text: params.text })
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || 'There was an error' })

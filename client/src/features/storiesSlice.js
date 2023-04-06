@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { axiosInstance } from '../axios'
+import { axiosPrivate } from '../utils/axiosPrivate'
 import { openModal } from './modalSlice'
 
 export const getStories = createAsyncThunk('story/getStrories', async (_, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.get('/stories')
+    const { data } = await axiosPrivate.get('/stories')
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -20,7 +20,7 @@ export const createStory = createAsyncThunk('story/createStory', async (story, {
         "Content-Type": "multipart/form-data"
       }
     }
-    const { data } = await axiosInstance.post('/stories', story, config)
+    const { data } = await axiosPrivate.post('/stories', story, config)
     dispatch(openModal({ message: 'Story was created successfully.', success: true }))
     return data
   } catch (error) {

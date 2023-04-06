@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { axiosInstance } from '../axios'
+import { axiosPublic } from '../utils/axiosPublic'
+import { axiosPrivate } from '../utils/axiosPrivate'
 import { openModal } from './modalSlice'
 
 export const login = createAsyncThunk('auth/login', async (form, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.post('/auth/login', form)
+    const { data } = await axiosPublic.post('/auth/login', form)
     return data
   } catch (error) {
     dispatch(openModal({ message: error.response?.data?.message || "There was an error", success: false }))
@@ -17,7 +18,7 @@ export const login = createAsyncThunk('auth/login', async (form, { dispatch, rej
 export const signup = createAsyncThunk('auth/signup', async (form, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.post('/auth/signup', form)
+    const { data } = await axiosPublic.post('/auth/signup', form)
     return data
   } catch (error) {
     dispatch(openModal({ message: error.response?.data?.message || "There was an error", success: false }))
@@ -29,10 +30,10 @@ export const signup = createAsyncThunk('auth/signup', async (form, { dispatch, r
 export const checkLogin = createAsyncThunk('auth/checkLogin', async (_, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.post('/auth/checkLogin')
+    const { data } = await axiosPrivate.post('/auth/checkLogin')
     return data
   } catch (error) {
-    dispatch(openModal({ message: error.response?.data?.message || "There was an error", success: false }))
+    // dispatch(openModal({ message: error.response?.data?.message || "There was an error", success: false }))
     return rejectWithValue({ message: error?.response?.data?.message || 'There was an error' })
   }
 })
@@ -40,7 +41,7 @@ export const checkLogin = createAsyncThunk('auth/checkLogin', async (_, { dispat
 export const logout = createAsyncThunk('auth/logout', async (_, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.get('/auth/logout')
+    const { data } = await axiosPrivate.get('/auth/logout')
     return data
   } catch (error) {
     dispatch(openModal({ message: error.response?.data?.message || "There was an error", success: false }))
@@ -51,7 +52,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, { dispatch, reje
 export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (form, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.post('/auth/forgotPassword', form)
+    const { data } = await axiosPrivate.post('/auth/forgotPassword', form)
     dispatch(openModal({ message: data.message, success: true }))
     return data
   } catch (error) {
@@ -63,7 +64,7 @@ export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (for
 export const resetPassword = createAsyncThunk('auth/resetPassword', async ({ resetToken, form, navigate }, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.patch(`/auth/resetPassword/${resetToken}`, form.password)
+    const { data } = await axiosPrivate.patch(`/auth/resetPassword/${resetToken}`, form.password)
     // data is the action.payload
     dispatch(openModal({ message: data.message, success: true }))
     navigate('/auth')
@@ -125,7 +126,7 @@ const authSlice = createSlice({
     },
     [checkLogin.fulfilled]: (state, action) => {
       state.checkLoginLoading = false
-      state.isLoggedIn = action.payload.isLoggedIn
+      state.isLoggedIn = action.payload.success
       state.username = action.payload.username
       state.profilePicture = action.payload.profilePicture
       state.userId = action.payload.userId

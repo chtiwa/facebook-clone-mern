@@ -41,7 +41,7 @@ const Search = () => {
       ) : (
         <AiOutlineArrowLeft className='search__input-container-icon' />
       )}
-      <input type="text" name="search" value={search || ""} onChange={handleChange} onKeyUp={handleSearch} placeholder='Search on facebook' autoComplete="off" />
+      <input type="text" name="search" value={search || ""} onChange={handleChange} onKeyUp={handleSearch} placeholder='Search users on facebook' autoComplete="off" />
       {isOpen && !loading && users.length > 0 && search.length > 0 && (
         <div className="search__content">
           {users.map((user, index) => {

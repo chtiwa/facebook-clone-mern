@@ -1,4 +1,5 @@
-const nodeoutlook = require('nodejs-nodemailer-outlook');
+const nodeoutlook = require('nodejs-nodemailer-outlook')
+
 const sendEmail = (options) => {
   nodeoutlook.sendEmail({
     auth: {
@@ -7,9 +8,8 @@ const sendEmail = (options) => {
     },
     from: process.env.OUTLOOK_EMAIL,
     to: options.to,
-    // subject: options.subject,
-    subject: 'Password reset',
-    text: options.text,
+    subject: options.subject,
+    html: options.html,
     onError: (e) => (e),
     onSuccess: (i) => (i)
   })

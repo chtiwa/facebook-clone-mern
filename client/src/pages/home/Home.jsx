@@ -10,21 +10,6 @@ import { getPosts } from '../../features/postsSlice'
 
 const Home = () => {
   const dispatch = useDispatch()
-  // const { page, pages, lastPostY } = useSelector(state => state.posts)
-
-  // const [scrollPosition, setScrollPosition] = useState(0)
-
-  // const handleScroll = useCallback(() => {
-  //   setScrollPosition(window.pageYOffset)
-  //   if (scrollPosition >= lastPostY && pages > page) {
-  //     dispatch(setPage(page + 1))
-  //   }
-  // }, [dispatch, lastPostY, page, pages, scrollPosition])
-
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll)
-  //   return () => window.removeEventListener('scroll', handleScroll)
-  // }, [handleScroll])
 
   useEffect(() => {
     dispatch(getPosts())

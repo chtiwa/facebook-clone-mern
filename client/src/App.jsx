@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { io } from 'socket.io-client'
+// import { io } from 'socket.io-client'
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import Authentication from './pages/authentication/Authentication';
 import Home from './pages/home/Home'
@@ -14,20 +14,22 @@ import PrivateRoute from './PrivateRoute';
 import MessageModal from './components/modal/Modal'
 
 const App = () => {
-  useEffect(() => {
-    const socket = "http://localhost:5001"
-  }, [])
+
+  // useEffect(() => {
+  //   const socket = "http://localhost:5001"
+  // }, [])
+
   return (
     <BrowserRouter>
       <MessageModal />
       <Routes>
+        <Route path="/" element={<PublicRoute><Authentication /></PublicRoute>} />
         <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
-          <Route path="" element={<Home />} />
+          <Route path="home" element={<Home />} />
           <Route path="user" element={<User />} />
           <Route path="messenger" element={<Messenger />} />
         </Route>
-        <Route path="/auth" element={<PublicRoute><Authentication /></PublicRoute>} />
-        <Route path="/resetpassword/:resetToken" element={<ResetPassword />} />
+        <Route path="/resetpassword/:resetToken" element={<PublicRoute><ResetPassword /></PublicRoute>} />
         <Route path="*" element={<Redirect />} />
       </Routes>
     </BrowserRouter>

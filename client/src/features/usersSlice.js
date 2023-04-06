@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { axiosInstance } from '../axios'
+import { axiosPrivate } from '../utils/axiosPrivate'
+
 
 export const getFreinds = createAsyncThunk('users/getFreinds', async (_, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.get('/users')
+    const { data } = await axiosPrivate.get('/users')
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -14,7 +15,7 @@ export const getFreinds = createAsyncThunk('users/getFreinds', async (_, { dispa
 export const getUser = createAsyncThunk('users/getUser', async (params, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.get(`/users/getUser?username=${params.username}`)
+    const { data } = await axiosPrivate.get(`/users/getUser?username=${params.username}`)
     return data[0]
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -25,7 +26,7 @@ export const getUser = createAsyncThunk('users/getUser', async (params, { dispat
 export const searchUsers = createAsyncThunk('users/searchUsers', async (search, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.get(`/users/searchUsers?search=${search}`)
+    const { data } = await axiosPrivate.get(`/users/searchUsers?search=${search}`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -40,7 +41,7 @@ export const changeCoverPicture = createAsyncThunk('users/changeCoverPicture', a
         "Content-Type": "multipart/form-data"
       }
     }
-    const { data } = await axiosInstance.post(`/users/changeCoverPicture`, form, config)
+    const { data } = await axiosPrivate.post(`/users/changeCoverPicture`, form, config)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -55,7 +56,7 @@ export const changeProfilePicture = createAsyncThunk('users/changeProfilePicture
         "Content-Type": "multipart/form-data"
       }
     }
-    const { data } = await axiosInstance.post(`/users/changeProfilePicture`, form, config)
+    const { data } = await axiosPrivate.post(`/users/changeProfilePicture`, form, config)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -65,7 +66,7 @@ export const changeProfilePicture = createAsyncThunk('users/changeProfilePicture
 export const getFreindRequestsSent = createAsyncThunk('users/getFreindRequestsSent', async (params, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.get(`/users/getFreindRequestsSent`)
+    const { data } = await axiosPrivate.get(`/users/getFreindRequestsSent`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -75,7 +76,7 @@ export const getFreindRequestsSent = createAsyncThunk('users/getFreindRequestsSe
 export const getFreindRequestsReceived = createAsyncThunk('users/getFreindRequestsReceived', async (params, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.get(`/users/getFreindRequestsReceived`)
+    const { data } = await axiosPrivate.get(`/users/getFreindRequestsReceived`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -85,7 +86,7 @@ export const getFreindRequestsReceived = createAsyncThunk('users/getFreindReques
 export const sendFreindRequest = createAsyncThunk('users/sendFreindRequest', async (params, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.patch(`/users/sendFreindRequest/${params.userId}`)
+    const { data } = await axiosPrivate.patch(`/users/sendFreindRequest/${params.userId}`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -95,7 +96,7 @@ export const sendFreindRequest = createAsyncThunk('users/sendFreindRequest', asy
 export const acceptFreindRequest = createAsyncThunk('users/acceptFreindRequest', async (_id, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.patch(`/users/acceptFreindRequest/${_id}`)
+    const { data } = await axiosPrivate.patch(`/users/acceptFreindRequest/${_id}`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -105,7 +106,7 @@ export const acceptFreindRequest = createAsyncThunk('users/acceptFreindRequest',
 export const removeFreind = createAsyncThunk('users/removeFreind', async (params, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.patch(`/users/removeFreind/${params.userId}`)
+    const { data } = await axiosPrivate.patch(`/users/removeFreind/${params.userId}`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })

@@ -1,18 +1,17 @@
 const jwt = require('jsonwebtoken')
 
 const auth = (req, res, next) => {
-  const token = req.cookies.token
-  if (!token) {
+  const access_token = req.cookies.access_token
+  if (!access_token) {
     return res.status(401).json({ message: `Unauthorized` })
   }
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET)
+    const payload = jwt.verify(access_token, process.env.ACCESS_TOKEN_SECRET)
     req.user = { username: payload.username, userId: payload.userId }
-    // console.log(req.user)
     next()
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    throw new BaseError('Unauthorized', 401)
   }
 }
 

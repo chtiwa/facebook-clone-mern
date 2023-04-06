@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { login, signup, logout, checkLogin, resetPassword, forgotPassword } = require('../controllers/auth')
-const upload = require('../utils/multerUser')
+// const upload = require('../utils/multerUser')
 
 router.route('/login').post(login)
 // router.route('/signup').post(upload.single('file'), signup)

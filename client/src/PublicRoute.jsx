@@ -12,7 +12,7 @@ const PublicRoute = ({ children }) => {
   }, [dispatch])
 
   if (!checkLoginLoading && isLoggedIn) {
-    return <Navigate to="/" />
+    return <Navigate to="/home" />
   }
 
   return (

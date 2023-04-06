@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
   }, [dispatch])
 
   if (!checkLoginLoading && !isLoggedIn) {
-    return <Navigate to="/auth" />
+    return <Navigate to="/" />
   }
 
   return (

@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { axiosInstance } from '../axios'
+import { axiosPrivate } from '../utils/axiosPrivate'
 import { openModal } from './modalSlice'
 
 export const getPosts = createAsyncThunk('posts/getPosts', async (_, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    // const { data } = await axiosInstance.get(`posts/?page=${page}`)
-    const { data } = await axiosInstance.get(`posts`)
+    // const { data } = await axiosPrivate.get(`posts/?page=${page}`)
+    const { data } = await axiosPrivate.get(`posts`)
     // dispatch(setPage(page + 1))
     return data
   } catch (error) {
@@ -22,7 +22,7 @@ export const createPost = createAsyncThunk('posts/createPost', async (form, { di
         "Content-Type": "multipart/form-data"
       }
     }
-    const { data } = await axiosInstance.post(`posts`, form, config)
+    const { data } = await axiosPrivate.post(`posts`, form, config)
     dispatch(openModal({ message: 'Post was created successfully', success: true }))
     return data
   } catch (error) {
@@ -34,7 +34,7 @@ export const createPost = createAsyncThunk('posts/createPost', async (form, { di
 export const deletePost = createAsyncThunk('posts/deletePost', async (id, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.delete(`posts/${id}`)
+    const { data } = await axiosPrivate.delete(`posts/${id}`)
     dispatch(openModal({ message: 'Post was deleted successfully', success: true }))
     return data
   } catch (error) {
@@ -46,8 +46,8 @@ export const deletePost = createAsyncThunk('posts/deletePost', async (id, { disp
 export const getUserPosts = createAsyncThunk('posts/getUserPosts', async (params, { dispatch, rejectWithValue }) => {
   dispatch(setLoading())
   try {
-    // const { data } = await axiosInstance.post(`posts/userPosts/${userId}`)
-    const { data } = await axiosInstance.get(`posts/userPosts/${params.creator}?page=${params.page}`)
+    // const { data } = await axiosPrivate.post(`posts/userPosts/${userId}`)
+    const { data } = await axiosPrivate.get(`posts/userPosts/${params.creator}?page=${params.page}`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -56,7 +56,7 @@ export const getUserPosts = createAsyncThunk('posts/getUserPosts', async (params
 export const likePost = createAsyncThunk('posts/likePost', async (postId, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.patch(`posts/likePost/${postId}`)
+    const { data } = await axiosPrivate.patch(`posts/likePost/${postId}`)
     // data :{hasLikedPost,likedPost}
     return data
   } catch (error) {
@@ -66,7 +66,7 @@ export const likePost = createAsyncThunk('posts/likePost', async (postId, { disp
 export const unlikePost = createAsyncThunk('posts/unlikePost', async (postId, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosInstance.patch(`posts/unlikePost/${postId}`)
+    const { data } = await axiosPrivate.patch(`posts/unlikePost/${postId}`)
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })
@@ -77,7 +77,7 @@ export const commentPost = createAsyncThunk('posts/commentPost', async (params, 
   try {
     console.log(params)
     const { postId, comment } = params
-    const { data } = await axiosInstance.patch(`posts/commentPost/${postId}`, { comment: comment })
+    const { data } = await axiosPrivate.patch(`posts/commentPost/${postId}`, { comment: comment })
     return data
   } catch (error) {
     return rejectWithValue({ message: error?.response?.data?.message || "There was an error" })

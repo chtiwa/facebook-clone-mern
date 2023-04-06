@@ -28,7 +28,7 @@ const Authentication = () => {
   }
 
   const handleForgotPassword = () => {
-    if (form.email.length < 6) {
+    if (form.email.trim().length < 6) {
       dispatch(openModal({ message: 'Not a valid email!', success: false }))
       return
     }
@@ -80,7 +80,7 @@ const Authentication = () => {
           <hr className='auth-form-hr' />
         </div>
         <div className="auth-form-control">
-          <button disabled={`${isEmailSent ? true : false}`} onClick={() => setIsLogin(isLogin => !isLogin)} className="auth-form-control-create">
+          <button disabled={isEmailSent ? true : false} onClick={() => setIsLogin(isLogin => !isLogin)} className="auth-form-control-create">
             {!isLogin ? "Login" : "Create new account"}
           </button>
         </div>

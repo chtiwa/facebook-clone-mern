@@ -59,7 +59,8 @@
   height: 100vh;
   width: 100vw;
   z-index: 2;
-  background-color: var(--whitish);
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(1px);
   display: flex;
   align-items: center;
   justify-content: center;

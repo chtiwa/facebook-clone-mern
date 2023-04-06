@@ -18,6 +18,7 @@ const usersRoutes = require('./routes/users')
 const storiesRoutes = require('./routes/stories')
 const conversationsRoutes = require('./routes/conversations')
 const messagesRoutes = require('./routes/messages')
+const errorHandler = require('./middleware/error-handler')
 const helmet = require('helmet')
 const xss = require('xss-clean')
 const rateLimiter = require('express-rate-limit')
@@ -50,6 +51,8 @@ app.use('/api/v1/users', authentication, usersRoutes)
 app.use('/api/v1/stories', authentication, storiesRoutes)
 app.use('/api/v1/conversations', authentication, conversationsRoutes)
 app.use('/api/v1/messages', authentication, messagesRoutes)
+
+app.use(errorHandler)
 
 // socket.io
 // seperate folder for socket.io ?

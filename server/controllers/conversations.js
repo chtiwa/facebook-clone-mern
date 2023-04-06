@@ -1,22 +1,15 @@
 const Conversation = require('../models/Conversation')
+const asyncWrapper = require('../middleware/async-wrapper')
 
-const createConversation = async (req, res) => {
-  try {
-    const conversation = await Conversation.create({ members: [req.body.senderId, req.body.receiverId] })
-    res.status(201).json(conversation)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
+const createConversation = asyncWrapper(async (req, res) => {
+  const conversation = await Conversation.create({ members: [req.body.senderId, req.body.receiverId] })
+  res.status(201).json(conversation)
+})
 
-const getConversations = async (req, res) => {
-  try {
-    const conversation = await Conversation.find({ members: { $in: [req.params.userId] } })
-    // const conversation = await Conversation.find()
-    res.status(200).json(conversation)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
+const getConversations = asyncWrapper(async (req, res) => {
+  const conversation = await Conversation.find({ members: { $in: [req.params.userId] } })
+  // const conversation = await Conversation.find()
+  res.status(200).json(conversation)
+})
 
 module.exports = { createConversation, getConversations }
