@@ -35,7 +35,7 @@ const getStories = asyncWrapper(async (req, res) => {
 })
 
 const deleteStory = asyncWrapper(async (req, res) => {
-  const stories = await Story.findByIdAndDelete({ _id: req.params.id })
+  await Story.findByIdAndDelete({ _id: req.params.id })
   res.status(204).json({ message: 'Deleted' })
 })
 

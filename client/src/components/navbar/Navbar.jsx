@@ -2,18 +2,23 @@ import React, { useEffect } from 'react'
 import './navbar.css'
 import Search from '../search/Search'
 import NavInfo from '../nav-info/NavInfo'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { getFreinds, getFreindRequestsSent, getFreindRequestsReceived } from '../../features/usersSlice'
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  // const { freindsIds } = useState(state => state.users)
+  const { isLoggedIn, checkLoginLoading } = useSelector(state => state.auth)
   useEffect(() => {
     dispatch(getFreinds())
     dispatch(getFreindRequestsSent())
     dispatch(getFreindRequestsReceived())
   }, [dispatch])
+
+  useEffect(() => {
+    if (!checkLoginLoading && !isLoggedIn) navigate('/')
+  }, [isLoggedIn])
 
   return (
     <div className="navbar">

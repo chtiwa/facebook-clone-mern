@@ -4,9 +4,8 @@ const { login, signup, logout, checkLogin, resetPassword, forgotPassword } = req
 // const upload = require('../utils/multerUser')
 
 router.route('/login').post(login)
-// router.route('/signup').post(upload.single('file'), signup)
 router.route('/signup').post(signup)
-router.route('/checkLogin').post(checkLogin)
+router.route('/checkLogin').get(checkLogin)
 router.route('/logout').get(logout)
 router.route('/forgotPassword').post(forgotPassword)
 router.route('/resetPassword/:resetToken').patch(resetPassword)

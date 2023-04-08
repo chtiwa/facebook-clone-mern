@@ -1,4 +1,6 @@
 const User = require('../models/User')
+const Post = require('../models/Post')
+const Story = require('../models/Story')
 const cloudinary = require('../utils/cloudinary')
 const asyncWrapper = require('../middleware/async-wrapper')
 
@@ -74,8 +76,8 @@ const getFreindRequestsReceived = asyncWrapper(async (req, res) => {
   let freindRequestsReceivedList = [];
   freindRequestsReceived.map((userId) => {
     const { _id, username, profilePicture } = userId;
-    freindRequestsReceivedList.push({ _id, username, profilePicture });
-  });
+    freindRequestsReceivedList.push({ _id, username, profilePicture })
+  })
   res.status(200).json(freindRequestsReceivedList)
 })
 
@@ -122,9 +124,12 @@ const changeProfilePicture = asyncWrapper(async (req, res) => {
     result = await cloudinary.uploader.upload(req.file.path, options)
   }
   let url = result?.secure_url || ''
-  // let format = result?.format || ''
   const user = await User.findByIdAndUpdate({ _id: req.user.userId }, { profilePicture: url }, { new: true })
   res.status(201).json(user.profilePicture)
+  // modify the user's image stored in the stories and posts
+  await Post.updateMany({ createdBy: user._id }, { creatorImage: user.profilePicture })
+  await Story.updateMany({ createdBy: user._id }, { profilePicture: user.profilePicture })
+  console.log("posts and stories updated!")
 })
 
 const changeCoverPicture = asyncWrapper(async (req, res) => {
@@ -139,7 +144,6 @@ const changeCoverPicture = asyncWrapper(async (req, res) => {
     result = await cloudinary.uploader.upload(req.file.path, options)
   }
   let url = result?.secure_url || ''
-  // let format = result?.format || ''
   const user = await User.findByIdAndUpdate({ _id: req.user.userId }, { coverPicture: url }, { new: true })
   res.status(201).json(user.coverPicture)
 })

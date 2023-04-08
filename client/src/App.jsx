@@ -24,12 +24,12 @@ const App = () => {
       <MessageModal />
       <Routes>
         <Route path="/" element={<PublicRoute><Authentication /></PublicRoute>} />
+        <Route path="/resetpassword" element={<PublicRoute><ResetPassword /></PublicRoute>} />
         <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
           <Route path="home" element={<Home />} />
           <Route path="user" element={<User />} />
           <Route path="messenger" element={<Messenger />} />
         </Route>
-        <Route path="/resetpassword/:resetToken" element={<PublicRoute><ResetPassword /></PublicRoute>} />
         <Route path="*" element={<Redirect />} />
       </Routes>
     </BrowserRouter>

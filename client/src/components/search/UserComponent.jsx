@@ -31,7 +31,7 @@ const UserComponent = ({ username, profilePicture, _id, removeFreind, sendFreind
         <div className="search__content-user-profile-pciture">
           {profilePicture === '' ? (
             <div className="search__content-user-profile-picture-empty">
-              <img src="no-profile-picture.png" alt="" />
+              <img src="/no-profile-picture.png" alt="" />
             </div>
           ) : (
             <img src={profilePicture} alt="" />

@@ -28,12 +28,12 @@ const Authentication = () => {
   }
 
   const handleForgotPassword = () => {
+    if (isEmailSent) return
     if (form.email.trim().length < 6) {
       dispatch(openModal({ message: 'Not a valid email!', success: false }))
       return
     }
     dispatch(forgotPassword(form))
-    // also check the success
     if (!emailLoading && !emailError) {
       setIsEmailSent(true)
     }
@@ -55,10 +55,10 @@ const Authentication = () => {
           </div>
         )}
         <div className="auth-form-control">
-          <input onChange={handleChange} type="email" name="email" value={form.email || ""} placeholder="e-mail address" minLength={6} maxLength={30} />
+          <input onChange={handleChange} type="email" name="email" value={form.email || ""} placeholder="johnwick@gmail.com" minLength={6} maxLength={60} required />
         </div>
         <div className="auth-form-control auth-form-control-password">
-          <input onChange={handleChange} type={`${isPassword ? "password" : "text"}`} name="password" value={form.password || ""} placeholder="password" className='auth-password-input' minLength={6} maxLength={20} />
+          <input onChange={handleChange} type={`${isPassword ? "password" : "text"}`} name="password" value={form.password || ""} placeholder="johnwick" className='auth-password-input' minLength={6} maxLength={20} required />
           {isPassword && form.password.length > 0 && (
             <AiOutlineEye className="auth-password-icon" onClick={() => setIsPassword(!isPassword)} />
           )}
@@ -80,6 +80,7 @@ const Authentication = () => {
           <hr className='auth-form-hr' />
         </div>
         <div className="auth-form-control">
+          {/* when the user demanded a password reset then disbale this button */}
           <button disabled={isEmailSent ? true : false} onClick={() => setIsLogin(isLogin => !isLogin)} className="auth-form-control-create">
             {!isLogin ? "Login" : "Create new account"}
           </button>

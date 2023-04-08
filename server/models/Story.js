@@ -12,7 +12,7 @@ const StorySchema = new mongoose.Schema({
     type: String
   },
   creatorId: {
-    type: String
+    type: mongoose.Schema.Types.ObjectId
   },
 }, { timestamps: true })
 

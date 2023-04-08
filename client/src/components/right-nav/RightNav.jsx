@@ -29,7 +29,7 @@ const RightNav = () => {
                 {profilePicture !== '' ? (
                   <img src={profilePicture} alt="" />
                 ) : (
-                  <img src="no-profile-picutre.png" alt="" />
+                  <img src="/no-profile-picutre.png" alt="" />
                 )}
               </div>
               <div className="right__nav-freinds-container-freind-name">

@@ -4,10 +4,11 @@ import { MdAddCircle } from 'react-icons/md'
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
 import { createStory, getStories, openCarousel } from '../../features/storiesSlice'
+import Loader from '../loader/Loader'
 
 const Stories = () => {
   const dispatch = useDispatch()
-  const { stories } = useSelector(state => state.stories)
+  const { stories, createStoryloading } = useSelector(state => state.stories)
   const [index, setIndex] = useState(0)
   // const [showStory, setShowStory] = useState(false)
   const [file, setFile] = useState('')
@@ -45,30 +46,32 @@ const Stories = () => {
   // overflow and translateX
   return (
     <div className="stories">
-      <div className="stories-inner">
-        {index < stories.length - 3 && (
-          <div className="stories-inner-arrow-forward" onClick={() => handleArrowClick("f")} >
-            <IoIosArrowForward className='stories-inner-arrow-forward-icon' />
-          </div>
-        )}
-        {index > 0 && (
-          <div className="stories-inner-arrow-back" onClick={() => handleArrowClick("b")} >
-            <IoIosArrowBack className='stories-inner-arrow-back-icon' />
-          </div>
-        )}
-        {/*  */}
-        {stories?.length > 0 && stories.map((story) => {
-          const { profilePicture, file, creator, _id } = story
-          return (
-            <div className="stories-inner-container" onClick={() => dispatch(openCarousel())} style={{ transform: `translateX(-${index * 126}px)` }} key={_id}>
-              <img src={file.url} alt="" className='stories-inner-container-img' />
-              <div className="stories-inner-container-userimg">
-                <img src={profilePicture} alt="" className='stories-inner-container-userimg-file' />
-              </div>
+      {stories.length !== 0 && (
+        <div className="stories-inner">
+          {!createStoryloading && index < stories.length - 3 && (
+            <div className="stories-inner-arrow-forward" onClick={() => handleArrowClick("f")} >
+              <IoIosArrowForward className='stories-inner-arrow-forward-icon' />
             </div>
-          )
-        })}
-      </div>
+          )}
+          {!createStoryloading && index > 0 && (
+            <div className="stories-inner-arrow-back" onClick={() => handleArrowClick("b")} >
+              <IoIosArrowBack className='stories-inner-arrow-back-icon' />
+            </div>
+          )}
+          {createStoryloading && (<Loader />)}
+          {!createStoryloading && stories?.length > 0 && stories.map((story) => {
+            const { profilePicture, file, creator, _id } = story
+            return (
+              <div className="stories-inner-container" onClick={() => dispatch(openCarousel())} style={{ transform: `translateX(-${index * 126}px)` }} key={_id}>
+                <img src={file.url} alt="" className='stories-inner-container-img' />
+                <div className="stories-inner-container-userimg">
+                  <img src={profilePicture} alt="" className='stories-inner-container-userimg-file' />
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
       <div className="stories-inner-features">
         <form onSubmit={handleSubmit} className="stories-inner-container" >
           <label htmlFor="story-file">
@@ -81,10 +84,11 @@ const Stories = () => {
           )
           }
         </form>
-        {/* <div className="stories-inner-container-vr"></div> */}
-        <div className="stories-inner-container-view-stories" onClick={() => dispatch(openCarousel())}>
-          View Stroies
-        </div>
+        {stories.length !== 0 && (
+          <div className="stories-inner-container-view-stories" onClick={() => dispatch(openCarousel())}>
+            View Stroies
+          </div>
+        )}
       </div>
     </div>
   )

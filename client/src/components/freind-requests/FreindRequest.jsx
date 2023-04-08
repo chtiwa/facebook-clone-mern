@@ -29,7 +29,7 @@ const FreindRequest = () => {
           <div className="freind__request-user-profile-pciture">
             {profilePicture === '' ? (
               // <div className="freind__request-user-profile-picture-empty">
-              <img src="no-profile-picture.png" alt="" />
+              <img src="/no-profile-picture.png" alt="" />
               // </div>
             ) : (
               <img src={profilePicture} alt="" />

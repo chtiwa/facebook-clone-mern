@@ -14,12 +14,14 @@ const Layout = () => {
       {isCarouselOpen && <StoryCarousel stories={stories} />}
       {isCreateOpen && <Modal />}
       {isPostModalOpen && <PostModal />}
-      {!isCarouselOpen && !isCreateOpen && !isPostModalOpen &&
+      <Navbar />
+      <Outlet />
+      {/* {!isCarouselOpen && !isCreateOpen && !isPostModalOpen &&
         <>
           <Navbar />
           <Outlet />
-        </>
-      }
+          </>
+        } */}
     </>
   )
 }

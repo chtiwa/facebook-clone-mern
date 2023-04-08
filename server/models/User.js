@@ -28,10 +28,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
-  // followers: {
-  //   type: [mongoose.Schema.Types.ObjectId],
-  //   default: []
-  // },
   freindRequestsReceived: {
     type: [mongoose.Schema.Types.ObjectId],
     default: []
@@ -58,7 +54,8 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.methods.hashPassword = async function (password) {
   const salt = await bcryptjs.genSalt(10)
-  this.password = await bcryptjs.hash(password, salt)
+  const hashedPassword = await bcryptjs.hash(password, salt)
+  return hashedPassword
 }
 
 UserSchema.methods.comparePassword = async function (candidatePassword) {
@@ -67,17 +64,17 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
 }
 
 UserSchema.methods.createRefreshToken = function () {
-  const refresh_token = jwt.sign({ name: this.name, userId: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_LIFETIME })
+  const refresh_token = jwt.sign({ username: this.username, userId: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_LIFETIME })
   return refresh_token
 }
 
 UserSchema.methods.createAccessToken = function () {
-  const access_token = jwt.sign({ name: this.name, userId: this._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_LIFETIME })
+  const access_token = jwt.sign({ username: this.username, userId: this._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_LIFETIME })
   return access_token
 }
 
 UserSchema.methods.resetPasswordJWT = function () {
-  return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_PSW_RESET_LIFETIME })
+  return jwt.sign({ userId: this._id }, process.env.RESET_PASS_SECRET, { expiresIn: process.env.RESET_PASS_LIFETIME })
 }
 
 module.exports = mongoose.model('User', UserSchema) 

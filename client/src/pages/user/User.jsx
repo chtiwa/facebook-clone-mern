@@ -5,13 +5,13 @@ import { MdAddCircle } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeCoverPicture, changeProfilePicture, getUser } from '../../features/usersSlice'
 import { getUserPosts } from '../../features/postsSlice'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Loader from '../../components/loader/Loader'
 
 const User = () => {
+  const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch()
-  // user info
   const { username } = useSelector(state => state.auth)
   const { profilePicture, coverPicture, loading, name, freinds } = useSelector(state => state.users)
   const [file, setFile] = useState('')
@@ -25,24 +25,6 @@ const User = () => {
   useEffect(() => {
     dispatch(getUserPosts({ creator: location?.state?.creator }))
   }, [dispatch, location?.state?.creator])
-
-  // user posts 
-  // const { userPage, pages,  } = useSelector(state => state.posts)
-  // const [scrollPosition, setScrollPosition] = useState(0)
-
-
-  // const handleScroll = useCallback(() => {
-  //   setScrollPosition(window.pageYOffset)
-  //   if (scrollPosition >= lastPostY && pages > userPage) {
-  //     dispatch(setUserPage(userPage + 1))
-  //   }
-  // }, [dispatch, lastPostY, userPage, pages, scrollPosition])
-
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll)
-  //   return () => window.removeEventListener('scroll', handleScroll)
-  // }, [handleScroll])
-
 
   const handleFileChange = ({ target }) => {
     setFile(target.value)
@@ -62,6 +44,10 @@ const User = () => {
     setFile('')
     setFileData('')
     setIsOpen(false)
+  }
+
+  const handleFreindClick = (username) => {
+    navigate('/user', { state: { creator: username } })
   }
 
   if (loading) {
@@ -123,7 +109,7 @@ const User = () => {
                 {freinds.length > 0 && freinds.map((f) => {
                   const { _id, username, profilePicture } = f
                   return (
-                    <div className="user-freinds-container-inner-freinds-freind" key={_id}>
+                    <div className="user-freinds-container-inner-freinds-freind" key={_id} onClick={() => handleFreindClick(username)}>
                       <div className="user-freinds-container-inner-freinds-freind-img">
                         {profilePicture === '' ? (
                           <div className="user-freinds-container-inner-freinds-freind-img-empty"></div>

@@ -3,11 +3,10 @@ const mongoose = require('mongoose')
 const PostSchema = new mongoose.Schema({
   title: {
     type: String
-    // required: [true, 'Please provide a title']
   },
   creator: {
     type: String,
-    required: [true, 'Please provide the creator']
+    required: true
   },
   creatorImage: {
     type: String,
@@ -15,8 +14,9 @@ const PostSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, 'Please provide a description']
+    required: true
   },
+  // for a single file 
   // file: {
   //   format: String,
   //   url: String
@@ -37,7 +37,7 @@ const PostSchema = new mongoose.Schema({
     default: new Date()
   },
   createdBy: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
 }, { timestamps: true })

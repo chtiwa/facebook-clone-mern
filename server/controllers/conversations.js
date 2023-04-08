@@ -7,9 +7,9 @@ const createConversation = asyncWrapper(async (req, res) => {
 })
 
 const getConversations = asyncWrapper(async (req, res) => {
-  const conversation = await Conversation.find({ members: { $in: [req.params.userId] } })
+  const conversations = await Conversation.find({ members: { $in: [req.params.userId] } })
   // const conversation = await Conversation.find()
-  res.status(200).json(conversation)
+  res.status(200).json(conversations)
 })
 
 module.exports = { createConversation, getConversations }

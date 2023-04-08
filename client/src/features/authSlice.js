@@ -30,7 +30,7 @@ export const signup = createAsyncThunk('auth/signup', async (form, { dispatch, r
 export const checkLogin = createAsyncThunk('auth/checkLogin', async (_, { dispatch, rejectWithValue }) => {
   // dispatch(setLoading())
   try {
-    const { data } = await axiosPrivate.post('/auth/checkLogin')
+    const { data } = await axiosPrivate.get('/auth/checkLogin')
     return data
   } catch (error) {
     // dispatch(openModal({ message: error.response?.data?.message || "There was an error", success: false }))
@@ -133,6 +133,7 @@ const authSlice = createSlice({
     },
     [checkLogin.rejected]: (state, action) => {
       state.checkLoginLoading = false
+      state.isLoggedIn = false
     },
     [logout.fulfilled]: (state, action) => {
       state.loading = false

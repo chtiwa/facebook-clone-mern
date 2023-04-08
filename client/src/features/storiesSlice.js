@@ -3,7 +3,6 @@ import { axiosPrivate } from '../utils/axiosPrivate'
 import { openModal } from './modalSlice'
 
 export const getStories = createAsyncThunk('story/getStrories', async (_, { dispatch, rejectWithValue }) => {
-  dispatch(setLoading())
   try {
     const { data } = await axiosPrivate.get('/stories')
     return data
@@ -13,7 +12,6 @@ export const getStories = createAsyncThunk('story/getStrories', async (_, { disp
 })
 
 export const createStory = createAsyncThunk('story/createStory', async (story, { dispatch, rejectWithValue }) => {
-  dispatch(setLoading())
   try {
     const config = {
       headers: {
@@ -32,6 +30,7 @@ export const createStory = createAsyncThunk('story/createStory', async (story, {
 
 const initialState = {
   loading: true,
+  createStoryloading: false,
   stories: [],
   isCarouselOpen: false
 }
@@ -40,9 +39,9 @@ const storiesSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    setLoading: (state) => {
-      state.loading = true
-    },
+    // setLoading: (state) => {
+    //   state.loading = true
+    // },
     openCarousel: (state) => {
       state.isCarouselOpen = true
     },
@@ -58,12 +57,15 @@ const storiesSlice = createSlice({
     [getStories.rejected]: (state, action) => {
       state.loading = false
     },
+    [createStory.pending]: (state, action) => {
+      state.createStoryloading = true
+    },
     [createStory.fulfilled]: (state, action) => {
-      state.loading = false
+      state.createStoryloading = false
       state.stories = [...state.stories, action.payload]
     },
     [createStory.rejected]: (state, action) => {
-      state.loading = false
+      state.createStoryloading = false
     }
 
   }

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../authentication/auth.css'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { resetPassword } from '../../features/authSlice'
 import { openModal } from '../../features/modalSlice'
@@ -8,12 +8,22 @@ import { useDispatch } from 'react-redux'
 
 
 const ResetPassword = () => {
-  const { resetToken } = useParams()
+  // const { resetToken } = useParams()
+  const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const [form, setForm] = useState({ password: '', confirmPassword: '' })
   const [isPassword, setIsPassword] = useState(true)
+  const [resetToken, setResetToken] = useState('')
+
+  useEffect(() => {
+    console.log(location)
+    const searchParams = new URLSearchParams(location.search)
+    const pswjwt = searchParams.get('pswjwt');
+    // console.log(pswjwt)
+    setResetToken(pswjwt)
+  }, [location])
 
   const handleChange = ({ target }) => {
     let { name, value } = target

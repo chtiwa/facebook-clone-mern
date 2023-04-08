@@ -12,6 +12,7 @@ const Modal = () => {
   const dispatch = useDispatch()
   const [file, setFile] = useState('')
   const [fileData, setFileData] = useState('')
+  const [files, setFiles] = useState('')
   const [filesData, setFilesData] = useState('')
   const [description, setDescription] = useState('')
 
@@ -23,9 +24,12 @@ const Modal = () => {
   }, [isCreateOpen])
 
   const handleFileChange = ({ target }) => {
+    // console.log(target.value)
+    // console.log(target.files)
     setFile(target.value)
     // setFileData(target.files[0])
     setFilesData(target.files)
+    console.log(filesData)
     // console.log(target.files)
   }
 
@@ -54,7 +58,6 @@ const Modal = () => {
     <div className={`${isCreateOpen ? "create-modal-container" : 'hide'}`}>
       <div className="create-modal-inner">
         <div className="create-modal-info">
-          {/* <MessageModal /> */}
           <div className="create-modal-info-title">
             Create a post
           </div>
@@ -73,15 +76,15 @@ const Modal = () => {
               )}
               {username}
             </div>
-            <textarea name="description" placeholder={`What's up ${username} ?`} maxLength="1000" minLength="10" onChange={handleChange} value={description || ""} ref={inputRef} />
+            <textarea name="description" placeholder={`What's up ${username} ?`} maxLength="1000" minLength="10" onChange={handleChange} value={description || ""} ref={inputRef} required />
           </div>
           <div className="create-modal-input-container">
             <label htmlFor="post-file" >
               <MdAddCircle className="create-modal-input-container-icon" />
-              {/* {file === '' ? (<>Select a file</>) : (<>{fileData?.name}</>)} */}
-              {fileData.length === 0 ? (<>Select a file or multiple files</>) : (<>{filesData.length}</>)}
+              {filesData.length === 0 && (<>Select one or multiple files</>)}
+              {filesData.length === 1 && (filesData[0].name)}
+              {filesData.length > 1 && (filesData.length)}
             </label>
-            {/* <input type="file" id="post-file" name="file" onChange={handleFileChange} value={file || ''} /> */}
             <input type="file" multiple id="post-file" name="files" onChange={handleFileChange} value={file || ''} />
           </div>
           <button type="submit" className='create-modal-form-btn'>Publish</button>

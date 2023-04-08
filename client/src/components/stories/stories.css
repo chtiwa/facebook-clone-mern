@@ -8,6 +8,7 @@
   background-color: var(--white);
   height: 300px;
   width: 500px;
+  padding: 0 0.5rem;
   border-radius: 10px;
   box-shadow: 0 0 3px var(--rgba);
   /* message modal
@@ -24,6 +25,7 @@
   overflow: hidden;
   transition: tansform 0.3s;
   max-width: 484px;
+  min-height: 212px;
 }
 
 .stories-inner-arrow-forward {
@@ -59,11 +61,11 @@
 
 .stories-inner-container {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .stories-inner-container input[type="file"] {
@@ -102,6 +104,8 @@
   height: 180px;
   width: 110px;
   border-radius: 15px;
+  object-position: center;
+  object-fit: cover;
 }
 
 .stories-inner-container-userimg {
@@ -109,6 +113,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  object-fit: contain;
   padding: 0.2rem;
   background-color: var(--accent);
   border-radius: 50%;

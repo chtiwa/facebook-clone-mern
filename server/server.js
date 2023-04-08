@@ -86,7 +86,7 @@ io.on('connection', (socket) => {
     // send the message to the dedicated user
     // when sending the messages in the client they will be saved in the database
     // console.log(user)
-    io.to(user.socketId).emit("getMessage", {
+    io.to(user?.socketId).emit("getMessage", {
       senderId,
       text
     })

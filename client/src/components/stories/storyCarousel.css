@@ -1,10 +1,17 @@
 .story-carousel {
-  position: relative;
+  position: fixed;
   height: 100vh;
-  width: 100vw;
-  background-color: var(--rgba);
+  width: 100%;
+  background-color: var(--rgba-2);
+  backdrop-filter: blur(5px);
   z-index: 2;
 }
+
+/* .story-carousel-wrapper {
+  position: relative;
+  width: 100vh;
+  height: 100vh;
+} */
 
 .stories-carousel-inner-close {
   z-index: 2;

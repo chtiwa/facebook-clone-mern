@@ -37,6 +37,7 @@
 
 .user-profilepic,
 .user-profilepic-empty {
+  object-fit: cover;
   position: absolute;
   bottom: -85px;
   left: 15px;
@@ -163,7 +164,7 @@
 .user-freinds-container-inner-freinds {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -215,7 +216,7 @@
 
 @media screen and (max-width:800px) {
   .user-cover-container {
-    width: 100vw;
+    width: 100%;
   }
 
   .user-change-file {

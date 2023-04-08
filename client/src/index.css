@@ -12,7 +12,8 @@
   --blackish: #282828;
   --secondary-blackish: #444;
   --white: #fff;
-  --rgba: rgba(0, 0, 0, 0.2);
+  --rgba: rgba(0, 0, 0, 0.3);
+  --rgba-2: rgba(0, 0, 0, 0.7);
   --accent: hsl(214, 89%, 52%);
   --accent-hover: hsl(214, 91%, 46%);
   --danger: #FC1919;
@@ -65,10 +66,4 @@ textarea {
   font-size: 18px;
   padding: 0.3rem;
   border-radius: 10px;
-}
-
-#root {
-  position: relative;
-  background-color: var(--whitish);
-  min-height: 100vh;
 }

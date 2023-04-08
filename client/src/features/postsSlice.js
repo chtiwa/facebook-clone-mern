@@ -90,13 +90,10 @@ const initialState = {
   // postModal files
   files: [],
   posts: [],
-  // page: 1,
-  // userPage: 1,
-  // pages: 1,
-  // lastPostY: 10000,
   comments: [],
   likes: [],
   loading: true,
+  createPostLoading: false,
   postsLoading: true,
   error: false
 }
@@ -145,11 +142,16 @@ const postsSlice = createSlice({
     [getPosts.rejected]: (state) => {
       state.postsLoading = false
     },
+    [createPost.pending]: (state, action) => {
+      state.createPostLoading = true
+    },
     [createPost.fulfilled]: (state, action) => {
       state.loading = false
+      state.createPostLoading = false
       state.posts = [...state.posts, action.payload]
     },
     [createPost.rejected]: (state) => {
+      state.createPostLoading = false
       state.loading = false
     },
     [deletePost.pending]: (state, action) => {
